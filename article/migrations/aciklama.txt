@@ -1,0 +1,5 @@
+uygulama içinde oluşturduğumuz modelleri, veri tabanına kayıt etmek için gerekli
+sql sorgularını bulunduran ve gerçekleştiren dosya
+1.her yeni model oluşturduğumuzda "python manage.py makemigrations" ile bu modelin nasıl bir sorgu yapacagını 
+belirtmemiz lazım böylelikle model için "initial.py" dosyası oluşacak ve sonra 
+2."python manage.py migrate" ile bunu admin paneline bildiriyoruz

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="jumbotron text-center">
+    <h3>Python Öğreniyorum Bloğuna Hoşgeldiniz</h3>
+    <p>Bu blogta geliştiriciler olarak blog yazılarınızı paylaşabilirsiniz ve insanlara yardımcı olabilirsiniz. </p>
+</div>
+<!--
+{% if number1 == 10 %}
+<p>Sayımız 10'a eşittir.</p>
+{% else %}
+<p>Sayımız 10'a eşit değildir.</p>
+{% endif %}-->
+<!--<ul>
+{% for sayi in number1 %}
+<li>{{sayi}}</li>
+{% endfor %}
+</ul>-->
+<p>
+    {% if request.user.is_authenticated %}
+        Giriş yapılmış, {{request.user.username}}.
+    {% else %}
+        Giriş yapılmamış.
+    {% endif %}
+</p>
+{% endblock body %}

@@ -1,0 +1,1 @@
+#bu projenin,klasörün bir python modülü olduğunu belirtir 

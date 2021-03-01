@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block body %}
+<h3 style="text-align: center;">Makaleler</h3>
+<hr>
+<!--arama çubuğu oluşturuyoruz-->
+<form>
+    {% csrf_token %}
+    <div class="search" >
+        <input type="text" name="keyword" class=" input-sm" maxlength="64" placeholder="Ara...">
+         <button type="submit" class="btn btn-danger btn">&nbsp Ara &nbsp</button>
+        </div>
+</form>
+{% if articles %}
+<!--
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Başlık</th>
+            <th scope="col">Yazar</th>
+            <th scope="col">Tarih</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for article in articles %}
+        <tr>
+            <th scope="row">{{article.id}}</th>
+            <td><a href="/articles/article/{{article.id}}">{{article.title}}</a></td>
+            <td>{{article.author.username}}</td>
+            <td>{{article.created_date}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+-->
+{% for article in articles %}
+
+<div class="row">
+
+    <!-- Post Content Column -->
+    <div class="col-lg-12">
+
+        <!-- Title -->
+        <a href="{% url 'article:detail' article.id %}"><!--/articles/article/{{article.id}} ile aynı tanım ama dinamik hali-->
+            <h3 class="mt-4" style="text-align: center;">{{article.title}}</h3>
+        </a>
+
+        <!-- Author -->
+        <p class="lead" style="text-align: center;">
+            Yazar: {{article.author.username}}
+        </p>
+
+
+        <!-- Date/Time -->
+        <p style="text-align: center;">Tarih: {{article.created_date}}</p>
+
+        <hr>
+
+        <!-- Preview Image -->
+        {% if article.article_image %}
+        <img class="img-fluid rounded" src="{{article.article_image.url}}" alt="">
+        {% endif %}
+
+
+        <!-- Post Content -->
+        <p>{{article.content|safe|truncatewords:30}}</p>
+        <!--djangonun kendi template filtrelerini kullandık
+            https://docs.djangoproject.com/en/3.1/ref/templates/builtins/-->
+        <a style="float: right;" href="{% url 'article:detail' article.id %}" class="btn btn-danger">Devamını oku</a>
+        <br>
+        <hr>
+    </div>
+    <!-- /.row -->
+
+</div>
+{% endfor %}
+{% else %}
+<div class="alert alert-danger">Makale bulunamadı</div>
+{% endif %}
+{% endblock body %}
